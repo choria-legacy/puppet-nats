@@ -1,0 +1,34 @@
+{
+  "name": "ripienaar-nats",
+  "version": "0.0.1",
+  "author": "ripienaar",
+  "summary": "NATS.io module for AIO Puppet 4",
+  "license": "Apache-2.0",
+  "source": "https://github.com/ripienaar/puppet-nats",
+  "project_page": "https://github.com/ripienaar/puppet-nats",
+  "issues_url": "https://github.com/ripienaar/puppet-nats/issues",
+  "dependencies": [
+    { "name": "puppetlabs/stdlib", "version_requirement": ">= 4.12.0 < 5.0.0" },
+    { "name": "camptocamp/systemd", "version_requirement": ">= 0.3.0 < 1.0.0" }
+  ],
+  "requirements": [
+    {
+      "name": "puppet",
+      "version_requirement": "4.5.0"
+    }
+  ],
+  "operatingsystem_support": [
+    {
+      "operatingsystem": "Debian",
+      "operatingsystemrelease": [
+        "8"
+      ]
+    },
+    {
+      "operatingsystem": "RedHat",
+      "operatingsystemrelease": [
+        "7"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+[Unit]
+Description=NATS.io Messaging System
+After=network.target
+
+[Service]
+StandardOutput=syslog
+StandardError=syslog
+ExecStart=<%= $nats::binpath %> --config <%= $nats::configdir %>/<%= $nats::service_name %>.cfg --pid <%= $nats::piddir %>/<%= $nats::service_name %>.pid -s
+PIDFile=<%= $nats::piddir %>/<%= $nats::service_name %>.pid
+
+[Install]
+WantedBy=multi-user.target

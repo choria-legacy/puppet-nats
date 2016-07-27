@@ -1,0 +1,39 @@
+port: <%= $nats::client_port %>
+monitor_port: <%= $nats::monitor_port %>
+
+debug: <%= $nats::debug %>
+trace: <%= $nats::trace %>
+
+tls {
+  cert_file: "<%= $nats::cert_file %>"
+  key_file: "<%= $nats::key_file %>"
+  ca_file: "<%= $nats::ca_file %>"
+  verify: true
+  timeout: 2
+}
+
+<% unless $nats::peers.empty { -%>
+cluster {
+  port: 4223
+
+  tls {
+    cert_file: "<%= $nats::cert_file %>"
+    key_file: "<%= $nats::key_file %>"
+    ca_file: "<%= $nats::ca_file %>"
+    verify: true
+    timeout: 2
+  }
+
+  authorization {
+    user: routes
+    password: <%= $nats::routes_password %>
+    timeout: 0.75
+  }
+
+  routes = [
+  <%- $nats::peers.each |$peer| { -%>
+    nats-route://routes:<%= $nats::routes_password %>@<%= $peer %>:<%= $nats::cluster_port %>
+  <%- } -%>
+  ]
+}
+<% } -%>
