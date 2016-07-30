@@ -13,7 +13,8 @@ class nats (
   String $service_name = "gnatsd",
   String $cert_file = "/etc/puppetlabs/puppet/ssl/certs/${facts['networking']['fqdn']}.pem",
   String $key_file = "/etc/puppetlabs/puppet/ssl/private_keys/${facts['networking']['fqdn']}.pem",
-  String $ca_file = "/etc/puppetlabs/puppet/ssl/certs/ca.pem"
+  String $ca_file = "/etc/puppetlabs/puppet/ssl/certs/ca.pem",
+  Boolean $manage_collectd = false
 ) {
   if $servers.empty or $facts["networking"]["fqdn"] in $servers {
     if SemVer.new($facts["aio_agent_version"]) < SemVer.new("1.5.2") {
@@ -25,6 +26,10 @@ class nats (
     include nats::install
     include nats::config
     include nats::service
+
+    if $manage_collectd {
+      include nats::collectd
+    }
   } else {
     fail(sprintf("%s is not in the list of NATS servers %s", $facts["networking"]["fqdn"], $servers.join(", ")))
   }

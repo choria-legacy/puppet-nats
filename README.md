@@ -40,6 +40,19 @@ If you do not specify servers, it becomes a standalone node:
 include nats
 ```
 
+### Collectd Stats
+
+If you use the `puppet/collectd` module to manage collectd this module can configure a metrics
+poller for your NATS instances
+
+```
+class{"nats":
+  servers => ["nats1.example.net", "nats2.example.net", "nats3.example.net"],
+  routes_password => "S3cret",
+  manage_collectd => true
+}
+```
+
 ## Compatibility
 
 It only supports Systemd based Debian and RedHat systems via the `camptocamp/systemd` module.
