@@ -15,6 +15,7 @@ tls {
 <% unless $nats::peers.empty { -%>
 cluster {
   port: 4223
+  no_advertise: <%= !$nats::announce_cluster %>
 
   tls {
     cert_file: "<%= $nats::cert_file %>"
