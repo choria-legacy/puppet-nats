@@ -6,6 +6,7 @@ class nats (
   String $cluster_port = "4223",
   Boolean $debug = false,
   Boolean $trace = false,
+  Boolean $announce_cluster = false,
   String $binpath = "/usr/sbin/gnatsd",
   String $configdir = "/etc/gnatsd",
   String $piddir = "/var/run",
