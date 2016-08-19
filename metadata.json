@@ -1,6 +1,6 @@
 {
   "name": "ripienaar-nats",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "author": "ripienaar",
   "summary": "NATS.io module for AIO Puppet 4",
   "license": "Apache-2.0",
