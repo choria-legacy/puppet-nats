@@ -1,0 +1,6 @@
+language: ruby
+cache: bundler
+sudo: false
+script: "bundle exec rake validate spec"
+rvm:
+ - 2.3.1
