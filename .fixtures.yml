@@ -1,0 +1,9 @@
+fixtures:
+  symlinks:
+    my_module: "#{source_dir}"
+  repositories:
+    stdlib: "git://github.com/puppetlabs/puppetlabs-stdlib"
+    systemd: "git@github.com:camptocamp/puppet-systemd.git"
+    collectd: "git@github.com:voxpupuli/puppet-collectd.git"
+    yum: "git@github.com:voxpupuli/puppet-yum.git"
+    concat: "git://github.com/puppetlabs/puppetlabs-concat"
