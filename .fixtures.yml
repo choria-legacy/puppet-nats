@@ -1,0 +1,9 @@
+fixtures:
+  symlinks:
+    nats: "#{source_dir}"
+  repositories:
+    stdlib: "https://github.com/puppetlabs/puppetlabs-stdlib.git"
+    systemd: "https://github.com/camptocamp/puppet-systemd.git"
+    collectd: "https://github.com/voxpupuli/puppet-collectd.git"
+    yum: "https://github.com/voxpupuli/puppet-yum.git"
+    concat: "https://github.com/puppetlabs/puppetlabs-concat"
