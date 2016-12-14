@@ -16,9 +16,18 @@ It only supports verified TLS connections and defaults to using the Puppet certi
 It's recommended that you define a cluster of servers equal to 3 nodes, but it can run
 standalone too.
 
-Logging is to syslog and various paths can be configured via the class properties.
+By default clients will use port `4222`, monitoring will be on port `8222` and
+cluster comms will use port `4223`.
 
-By default clients will use port `4222`, monitoring will be on port `8222` and cluster comms will use port `4223`.
+This module installs the included `gnatsd` binary to `/usr/sbin/gnatsd` by
+default and manages either a SysV init script (`nats::service_type =>
+'sysvinit'`), an Upstart job (`nats::service_type => 'upstart'`) or a Systemd
+Unit file (`nats::service_type => 'systemd'`) depending on the underlying
+operating system.
+
+Default logging is to syslog for `systemd`, to `/var/log/upstart/gnatsd.log` for
+`upstart` and to `/var/log/gnatsd-stderr.log` and `/var/log/gnatsd-stdout.log`
+for `sysvinit`. Various other paths can be configured via the class properties.
 
 ### Cluster of 3 Servers
 
@@ -40,6 +49,18 @@ If you do not specify servers, it becomes a standalone node:
 include nats
 ```
 
+### Change the service type manually (`systemd`, `upstart` or `sysvinit`)
+
+The module installs a Systemd Unit file, an Upstart Job or a classic SysV init
+script, depending on the underlying operating system. Usually there is no need
+to set the service type manually.
+
+```puppet
+class { 'nats':
+  service_type => 'systemd', # or 'upstart', or 'sysvinit'
+}
+```
+
 ### Collectd Stats
 
 If you use the `puppet/collectd` module to manage collectd this module can configure a metrics
@@ -55,4 +76,8 @@ class{"nats":
 
 ## Compatibility
 
-It only supports Systemd based Debian and RedHat systems via the `camptocamp/systemd` module.
+The module supports Debian, Ubuntu and RedHat/CentOS. You should be able to use
+it on other operating systems not directly supported as well, provided you set
+the `nats::service_type` parameter (it defaults to `sysvinit`).
+
+For Systemd support the module depends on the `camptocamp/systemd` module.

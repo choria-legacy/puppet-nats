@@ -17,7 +17,8 @@ describe "nats" do
         :servers => ["rspec.example.com", "other1.example.com", "other2.example.com"],
         :routes_password => "rspec_password",
         :cluster_port => "8223",
-        :binary_source => "puppet://rspec/binary"
+        :binary_source => "puppet://rspec/binary",
+        :service_type => "systemd"
       }
     end
 
@@ -36,6 +37,75 @@ describe "nats" do
       is_expected.to contain_file("/etc/gnatsd").with_ensure("directory")
       is_expected.to contain_systemd__unit_file("gnatsd.service") # @todo check content
       is_expected.to contain_service("gnatsd").with_ensure("running")
+      is_expected.to_not contain_file("gnatsd.upstart")
+      is_expected.to_not contain_file("gnatsd upstart initd symlink")
+      is_expected.to_not contain_file("gnatsd.sysvinit")
+    end
+  end
+
+  context "when service_type => upstart" do
+    let(:params) do
+      {
+        :servers => ["rspec.example.com", "other1.example.com", "other2.example.com"],
+        :routes_password => "rspec_password",
+        :cluster_port => "8223",
+        :binary_source => "puppet://rspec/binary",
+        :service_type => "upstart"
+      }
+    end
+
+    it "should install the binary, configdir and Upstart job" do
+      is_expected.to contain_file("/usr/sbin/gnatsd").with_source("puppet://rspec/binary")
+      is_expected.to contain_file("/etc/gnatsd").with_ensure("directory")
+      is_expected.to contain_service("gnatsd").with_ensure("running")
+      is_expected.to_not contain_systemd__unit_file("gnatsd.service")
+      is_expected.to contain_file("gnatsd upstart initd symlink").with(
+        {
+          :ensure => 'link',
+          :path => '/etc/init.d/gnatsd',
+          :target => '/lib/init/upstart-job'
+        }
+      )
+      is_expected.to contain_file("gnatsd.upstart").with(
+        {
+          :path => '/etc/init/gnatsd.conf',
+          :content => %r{^exec \/usr\/sbin\/gnatsd --config \/etc\/gnatsd\/gnatsd\.cfg$}
+        }
+      )
+    end
+  end
+
+  context "when service_type => sysvinit " do
+    let(:params) do
+      {
+        :servers => ["rspec.example.com", "other1.example.com", "other2.example.com"],
+        :routes_password => "rspec_password",
+        :cluster_port => "8223",
+        :binary_source => "puppet://rspec/binary",
+        :service_type => "sysvinit"
+      }
+    end
+
+    it "should install the binary, configdir and SysV init.d file" do
+      is_expected.to contain_file("/usr/sbin/gnatsd").with_source("puppet://rspec/binary")
+      is_expected.to contain_file("/etc/gnatsd").with_ensure("directory")
+      is_expected.to contain_service("gnatsd").with_ensure("running")
+      is_expected.to_not contain_systemd__unit_file("gnatsd.service")
+      is_expected.to contain_file("gnatsd.upstart").with_ensure('absent')
+      is_expected.to_not contain_file("gnatsd upstart initd symlink")
+      is_expected.to contain_file("gnatsd.sysvinit").with_path('/etc/init.d/gnatsd')
+      is_expected.to contain_file("gnatsd.sysvinit").with_content(
+        %r{^name="gnatsd"$}
+      )
+      is_expected.to contain_file("gnatsd.sysvinit").with_content(
+        %r{^program="\/usr\/sbin\/gnatsd"$}
+      )
+      is_expected.to contain_file("gnatsd.sysvinit").with_content(
+        %r{^args="--config \/etc\/gnatsd\/gnatsd.cfg --pid \$pidfile"$}
+      )
+      is_expected.to contain_file("gnatsd.sysvinit").with_content(
+        %r{^pidfile="\/var\/run\/gnatsd.pid"$}
+      )
     end
   end
 
