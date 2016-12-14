@@ -1,0 +1,18 @@
+# NATS.io Messaging System Server (gnatsd)
+#
+# NATS is an open source, lightweight, high-performance cloud native
+# infrastructure messaging system.
+#
+# This Upstart job is installed and managed by Puppet.
+
+description "NATS.io Messaging System Server"
+
+start on runlevel [2345]
+stop on runlevel ![2345]
+
+respawn
+respawn limit 10 5
+
+console log
+
+exec <%= $nats::binpath %> --config <%= $nats::configdir %>/<%= $nats::service_name %>.cfg
