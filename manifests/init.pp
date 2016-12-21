@@ -13,7 +13,7 @@ class nats (
   String $binpath = "/usr/sbin/gnatsd",
   String $configdir = "/etc/gnatsd",
   String $piddir = "/var/run",
-  String $binary_source = "puppet:///modules/nats/gnatsd-0.9.4",
+  String $binary_source = "puppet:///modules/nats/gnatsd-0.9.6",
   String $service_name = "gnatsd",
   Enum["running", "stopped"] $service_ensure = "running",
   Nats::Service_type $service_type = "sysvinit",
