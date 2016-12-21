@@ -4,6 +4,6 @@ class nats::config {
     group   => "root",
     mode    => "0640",
     content => epp("nats/nats.cfg.epp"),
-    notify  => Class["nats::service"]
+    notify  => Class["nats::service"],
   }
 }
