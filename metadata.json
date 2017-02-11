@@ -1,12 +1,12 @@
 {
-  "name": "ripienaar-nats",
-  "version": "0.0.5",
-  "author": "ripienaar",
-  "summary": "NATS.io module for AIO Puppet 4",
+  "name": "choria-nats",
+  "version": "0.0.6",
+  "author": "choria",
+  "summary": "NATS.io module for the Choria Orchestrator",
   "license": "Apache-2.0",
-  "source": "https://github.com/ripienaar/puppet-nats",
-  "project_page": "https://github.com/ripienaar/puppet-nats",
-  "issues_url": "https://github.com/ripienaar/puppet-nats/issues",
+  "source": "https://github.com/choria-io/puppet-nats",
+  "project_page": "https://github.com/choria-io/puppet-nats",
+  "issues_url": "https://github.com/choria-io/puppet-nats/issues",
   "dependencies": [
     { "name": "puppetlabs/stdlib", "version_requirement": ">= 4.12.0 < 5.0.0" },
     { "name": "camptocamp/systemd", "version_requirement": ">= 0.3.0 < 1.0.0" }
@@ -22,8 +22,8 @@
     {
       "operatingsystem": "Debian",
       "operatingsystemrelease": [
-	"6",
-	"7",
+        "6",
+        "7",
         "8"
       ]
     },
@@ -31,23 +31,23 @@
       "operatingsystem": "Ubuntu",
       "operatingsystemrelease": [
         "12.04",
-	"14.04",
-	"16.04"
+        "14.04",
+        "16.04"
       ]
     },
     {
       "operatingsystem": "RedHat",
       "operatingsystemrelease": [
-	"5",
-	"6",
+        "5",
+        "6",
         "7"
       ]
     },
     {
       "operatingsystem": "CentOS",
       "operatingsystemrelease": [
-	"5",
-	"6",
+        "5",
+        "6",
         "7"
       ]
     }
