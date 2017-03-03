@@ -7,3 +7,4 @@ fixtures:
     collectd: "https://github.com/voxpupuli/puppet-collectd.git"
     yum: "https://github.com/voxpupuli/puppet-yum.git"
     concat: "https://github.com/puppetlabs/puppetlabs-concat"
+    epel: "https://github.com/stahnma/puppet-module-epel"
