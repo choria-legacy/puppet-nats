@@ -1,5 +1,7 @@
 |Date      |Issue |Description                                                                                              |
 |----------|------|---------------------------------------------------------------------------------------------------------|
+|2017/03/05|      |Release 0.0.7                                                                                            |
+|2017/03/02|20    |Fix the selection of service provider                                                                    |
 |2017/02/11|      |Release 0.0.6 and move to `choria-io` project                                                            |
 |2016/12/21|      |Release 0.0.5                                                                                            |
 |2016/12/21|16    |Update NATS to 0.9.6                                                                                     |
