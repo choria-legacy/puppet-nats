@@ -1,2 +1,2 @@
 ---
-nats::service_type: sysvinit
+nats::service_type: init
