@@ -1,12 +1,12 @@
-class nats::install::sysvinit {
+class nats::install::init {
 
-  file { "gnatsd.sysvinit":
+  file { "gnatsd.init":
     ensure  => "present",
     owner   => "root",
     group   => "root",
     mode    => "0755",
     path    => "/etc/init.d/${nats::service_name}",
-    content => epp("nats/sysvinit.epp"),
+    content => epp("nats/init.epp"),
   }
 
   # Ubuntu supports both SysV init and Upstart, so in case a users wants to

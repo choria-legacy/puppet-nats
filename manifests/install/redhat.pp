@@ -6,7 +6,7 @@ class nats::install::redhat {
     group   => "root",
     mode    => "0755",
     path    => "/etc/init.d/${nats::service_name}",
-    content => epp("nats/sysvinit.epp"),
+    content => epp("nats/init.epp"),
   }
 
   Class[$name] ~> Class["nats::service"]
