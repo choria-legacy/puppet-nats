@@ -39,7 +39,7 @@ describe "nats" do
       is_expected.to contain_service("gnatsd").with_ensure("running")
       is_expected.to_not contain_file("gnatsd.upstart")
       is_expected.to_not contain_file("gnatsd upstart initd symlink")
-      is_expected.to_not contain_file("gnatsd.sysvinit")
+      is_expected.to_not contain_file("gnatsd.init")
     end
   end
 
@@ -75,14 +75,14 @@ describe "nats" do
     end
   end
 
-  context "when service_type => sysvinit " do
+  context "when service_type => init " do
     let(:params) do
       {
         :servers => ["rspec.example.com", "other1.example.com", "other2.example.com"],
         :routes_password => "rspec_password",
         :cluster_port => "8223",
         :binary_source => "puppet://rspec/binary",
-        :service_type => "sysvinit"
+        :service_type => "init"
       }
     end
 
@@ -93,17 +93,17 @@ describe "nats" do
       is_expected.to_not contain_systemd__unit_file("gnatsd.service")
       is_expected.to contain_file("gnatsd.upstart").with_ensure('absent')
       is_expected.to_not contain_file("gnatsd upstart initd symlink")
-      is_expected.to contain_file("gnatsd.sysvinit").with_path('/etc/init.d/gnatsd')
-      is_expected.to contain_file("gnatsd.sysvinit").with_content(
+      is_expected.to contain_file("gnatsd.init").with_path('/etc/init.d/gnatsd')
+      is_expected.to contain_file("gnatsd.init").with_content(
         %r{^name="gnatsd"$}
       )
-      is_expected.to contain_file("gnatsd.sysvinit").with_content(
+      is_expected.to contain_file("gnatsd.init").with_content(
         %r{^program="\/usr\/sbin\/gnatsd"$}
       )
-      is_expected.to contain_file("gnatsd.sysvinit").with_content(
+      is_expected.to contain_file("gnatsd.init").with_content(
         %r{^args="--config \/etc\/gnatsd\/gnatsd.cfg --pid \$pidfile"$}
       )
-      is_expected.to contain_file("gnatsd.sysvinit").with_content(
+      is_expected.to contain_file("gnatsd.init").with_content(
         %r{^pidfile="\/var\/run\/gnatsd.pid"$}
       )
     end

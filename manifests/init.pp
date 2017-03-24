@@ -16,7 +16,7 @@ class nats (
   String $binary_source = "puppet:///modules/nats/gnatsd-0.9.6",
   String $service_name = "gnatsd",
   Enum["running", "stopped"] $service_ensure = "running",
-  Nats::Service_type $service_type = "sysvinit",
+  Nats::Service_type $service_type = "init",
   String $cert_file = "/etc/puppetlabs/puppet/ssl/certs/${trusted['certname']}.pem",
   String $key_file = "/etc/puppetlabs/puppet/ssl/private_keys/${trusted['certname']}.pem",
   String $ca_file = "/etc/puppetlabs/puppet/ssl/certs/ca.pem",

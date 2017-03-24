@@ -1,1 +1,1 @@
-type Nats::Service_type = Enum['upstart', 'sysvinit', 'systemd']
+type Nats::Service_type = Enum['upstart', 'init', 'systemd', 'redhat']
