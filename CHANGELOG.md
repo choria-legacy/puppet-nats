@@ -1,5 +1,7 @@
 |Date      |Issue |Description                                                                                              |
 |----------|------|---------------------------------------------------------------------------------------------------------|
+|2017/03/24|25    |Fix NATS installation on RedHat based non systemd nodes                                                  |
+|2017/03/24|23    |Default to clientcert rather than FQDN for certs                                                         |
 |2017/03/05|      |Release 0.0.7                                                                                            |
 |2017/03/02|20    |Fix the selection of service provider                                                                    |
 |2017/02/11|      |Release 0.0.6 and move to `choria-io` project                                                            |
