@@ -1,5 +1,6 @@
 |Date      |Issue |Description                                                                                              |
 |----------|------|---------------------------------------------------------------------------------------------------------|
+|2017/03/28|      |Release 0.0.8                                                                                            |
 |2017/03/24|25    |Fix NATS installation on RedHat based non systemd nodes                                                  |
 |2017/03/24|23    |Default to clientcert rather than FQDN for certs                                                         |
 |2017/03/05|      |Release 0.0.7                                                                                            |
