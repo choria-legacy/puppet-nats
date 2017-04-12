@@ -2,3 +2,5 @@ pkg
 *.swp
 modules
 spec/fixtures
+.bundle/
+.vendor/
