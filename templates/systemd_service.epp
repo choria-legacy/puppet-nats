@@ -5,6 +5,9 @@ After=network.target
 [Service]
 StandardOutput=syslog
 StandardError=syslog
+<% if $nats::limit_nofile { -%>
+LimitNOFILE=<%= $nats::limit_nofile %>
+<% } -%>
 ExecStart=<%= $nats::binpath %> --config <%= $nats::configdir %>/<%= $nats::service_name %>.cfg --pid <%= $nats::piddir %>/<%= $nats::service_name %>.pid -s
 PIDFile=<%= $nats::piddir %>/<%= $nats::service_name %>.pid
 

@@ -7,7 +7,8 @@ describe "nats" do
       "osfamily" => "RedHat",
       "networking" => {
         "fqdn" => "rspec.example.com"
-      }
+      },
+      "PATH" => '/usr/bin'
     }
   end
 
@@ -22,10 +23,16 @@ describe "nats" do
       }
     end
 
+    it { should compile.with_all_deps }
+
     it "should calculate the peers correctly" do
       is_expected.to contain_file("/etc/gnatsd/gnatsd.cfg").with_content(/nats-route:\/\/routes:rspec_password@other1.example.com:8223/)
       is_expected.to contain_file("/etc/gnatsd/gnatsd.cfg").with_content(/nats-route:\/\/routes:rspec_password@other2.example.com:8223/)
       is_expected.to_not contain_file("/etc/gnatsd/gnatsd.cfg").with_content(/nats-route:\/\/routes:rspec_password@rspec.example.com:8223/)
+    end
+
+    it "should not contain LimitNOFILE" do
+      is_expected.not_to contain_file('/etc/systemd/system/gnatsd.service').with_content(/LimitNOFILE/)
     end
 
     it "should not use collectd by default" do
@@ -120,6 +127,18 @@ describe "nats" do
 
     it "should contain the curl_json plugin instance" do
       is_expected.to contain_collectd__plugin__curl_json("gnatsd").with_url("http://localhost:8222/varz")
+    end
+  end
+
+  context "with the LimitNOFILE option" do
+    let(:params) do
+      {
+        :limit_nofile => 5000,
+        :service_type => "systemd"
+      }
+    end
+    it "should contain LimitNOFILE" do
+      is_expected.to contain_file('/etc/systemd/system/gnatsd.service').with_content(/LimitNOFILE=5000/)
     end
   end
 

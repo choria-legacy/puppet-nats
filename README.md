@@ -29,12 +29,21 @@ Default logging is to syslog for `systemd`, to `/var/log/upstart/gnatsd.log` for
 `upstart` and to `/var/log/gnatsd-stderr.log` and `/var/log/gnatsd-stdout.log`
 for `init`. Various other paths can be configured via the class properties.
 
+It may happen that you run in a high amount of TCP connections. The default
+amount of open files is 1024 (each TCP connection is a file descriptor => is a
+file). You can increase this if you use the systemd init system. The option is
+limit\_nofile. You can check the amount of open TCP connections by:
+
+```bash
+lsof -p $(pgrep --pidfile /var/run/gnatsd.pid) | grep TCP -c
+```
+
 ### Cluster of 3 Servers
 
 Given 3 servers with cluster ports `4223` and password `S3cret` you configure the the
 class with the FQDNs of your 3 servers and a password
 
-```
+```puppet
 class{"nats":
   servers => ["nats1.example.net", "nats2.example.net", "nats3.example.net"],
   routes_password => "S3cret"
@@ -45,7 +54,7 @@ class{"nats":
 
 If you do not specify servers, it becomes a standalone node:
 
-```
+```puppet
 include nats
 ```
 
@@ -66,7 +75,7 @@ class { 'nats':
 If you use the `puppet/collectd` module to manage collectd this module can configure a metrics
 poller for your NATS instances
 
-```
+```puppet
 class{"nats":
   servers => ["nats1.example.net", "nats2.example.net", "nats3.example.net"],
   routes_password => "S3cret",
