@@ -1,5 +1,7 @@
 |Date      |Issue |Description                                                                                              |
 |----------|------|---------------------------------------------------------------------------------------------------------|
+|2017/03/17|      |Release 0.0.9                                                                                            |
+|2017/04/13|28    |Allow setting number of open files for systemd based machines using `limit_nofile`                       |
 |2017/03/28|      |Release 0.0.8                                                                                            |
 |2017/03/24|25    |Fix NATS installation on RedHat based non systemd nodes                                                  |
 |2017/03/24|23    |Default to clientcert rather than FQDN for certs                                                         |
