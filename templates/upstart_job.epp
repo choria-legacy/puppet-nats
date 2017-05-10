@@ -10,6 +10,9 @@ description "NATS.io Messaging System Server"
 start on runlevel [2345]
 stop on runlevel ![2345]
 
+setuid <%= $nats::user %>
+setgid <%= $nats::group %>
+
 respawn
 respawn limit 10 5
 

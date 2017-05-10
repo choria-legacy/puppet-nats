@@ -81,6 +81,23 @@ describe "nats" do
         }
       )
     end
+    context "with different users set" do
+      let(:params) do
+        {
+          :servers => ["rspec.example.com", "other1.example.com", "other2.example.com"],
+          :routes_password => "rspec_password",
+          :cluster_port => "8223",
+          :binary_source => "puppet://rspec/binary",
+          :service_type => "upstart",
+          :user  => "nats",
+          :group => "nats"
+        }
+      end
+      it "should create an upstart job" do
+        is_expected.to contain_file("gnatsd.upstart").with_content(/setuid nats/)
+        is_expected.to contain_file("gnatsd.upstart").with_content(/setgid nats/)
+      end
+    end
   end
 
   context "when service_type => init " do
@@ -114,6 +131,28 @@ describe "nats" do
       is_expected.to contain_file("gnatsd.init").with_content(
         %r{^pidfile="\/var\/run\/gnatsd.pid"$}
       )
+      is_expected.to contain_file("gnatsd.init").with_content(
+        %r{^user="root"$}
+      )
+      is_expected.to contain_file("gnatsd.init").with_content(
+        %r{^group="root"$}
+      )
+    end
+    context "with different users set" do
+      let(:params) do
+        {
+          :user  => "nats",
+          :group => "nats"
+        }
+      end
+      it "should create a sysvinit script" do
+        is_expected.to contain_file("gnatsd.init").with_content(
+          %r{^user="nats"$}
+        )
+        is_expected.to contain_file("gnatsd.init").with_content(
+          %r{^group="nats"$}
+        )
+      end
     end
   end
 
@@ -140,6 +179,50 @@ describe "nats" do
     end
     it "should contain LimitNOFILE" do
       is_expected.to contain_file("/etc/systemd/system/gnatsd.service").with_content(/LimitNOFILE=5000/)
+    end
+  end
+
+  context "when running as another user and group" do
+    let(:params) do
+      {
+        :user  => "nats",
+        :group => "nats"
+      }
+    end
+    context "should create a user if asked" do
+      let(:params) do
+        {
+          :manage_user  => true,
+          :user         => "nats",
+        }
+      end
+      it "should create a user" do
+        is_expected.to create_user("nats")
+      end
+      context "if manage_group is also true" do
+        let(:params) do
+          {
+            :manage_user  => true,
+            :manage_group => true,
+            :user         => "nats",
+            :group        => "nats"
+          }
+        end
+        it "should require the group" do
+          is_expected.to create_user("nats")
+        end
+      end
+    end
+    context "should create the group if asked" do
+      let(:params) do
+        {
+          :manage_group => true,
+          :group         => "nats",
+        }
+      end
+      it "should create the group" do
+        is_expected.to create_group("nats")
+      end
     end
   end
 

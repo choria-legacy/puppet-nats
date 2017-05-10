@@ -22,7 +22,11 @@ class nats (
   String $key_file = "/etc/puppetlabs/puppet/ssl/private_keys/${trusted['certname']}.pem",
   String $ca_file = "/etc/puppetlabs/puppet/ssl/certs/ca.pem",
   Boolean $manage_collectd = false,
-  Optional[Integer] $limit_nofile = undef
+  Optional[Integer] $limit_nofile = undef,
+  Boolean $manage_user = false,
+  Boolean $manage_group = false,
+  String $user = "root",
+  String $group = "root"
 ) {
   if $servers.empty or $facts["networking"]["fqdn"] in $servers {
     if SemVer.new($facts["aio_agent_version"]) < SemVer.new("1.5.2") {
