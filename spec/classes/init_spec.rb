@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe "nats" do
   let(:facts) do
@@ -8,7 +8,8 @@ describe "nats" do
       "networking" => {
         "fqdn" => "rspec.example.com"
       },
-      "PATH" => '/usr/bin'
+      "PATH" => "/usr/bin",
+      "operatingsystemmajrelease" => "6"
     }
   end
 
@@ -68,14 +69,14 @@ describe "nats" do
       is_expected.to_not contain_systemd__unit_file("gnatsd.service")
       is_expected.to contain_file("gnatsd upstart initd symlink").with(
         {
-          :ensure => 'link',
-          :path => '/etc/init.d/gnatsd',
-          :target => '/lib/init/upstart-job'
+          :ensure => "link",
+          :path => "/etc/init.d/gnatsd",
+          :target => "/lib/init/upstart-job"
         }
       )
       is_expected.to contain_file("gnatsd.upstart").with(
         {
-          :path => '/etc/init/gnatsd.conf',
+          :path => "/etc/init/gnatsd.conf",
           :content => %r{^exec \/usr\/sbin\/gnatsd --config \/etc\/gnatsd\/gnatsd\.cfg$}
         }
       )
@@ -98,9 +99,9 @@ describe "nats" do
       is_expected.to contain_file("/etc/gnatsd").with_ensure("directory")
       is_expected.to contain_service("gnatsd").with_ensure("running")
       is_expected.to_not contain_systemd__unit_file("gnatsd.service")
-      is_expected.to contain_file("gnatsd.upstart").with_ensure('absent')
+      is_expected.to contain_file("gnatsd.upstart").with_ensure("absent")
       is_expected.to_not contain_file("gnatsd upstart initd symlink")
-      is_expected.to contain_file("gnatsd.init").with_path('/etc/init.d/gnatsd')
+      is_expected.to contain_file("gnatsd.init").with_path("/etc/init.d/gnatsd")
       is_expected.to contain_file("gnatsd.init").with_content(
         %r{^name="gnatsd"$}
       )
@@ -138,7 +139,7 @@ describe "nats" do
       }
     end
     it "should contain LimitNOFILE" do
-      is_expected.to contain_file('/etc/systemd/system/gnatsd.service').with_content(/LimitNOFILE=5000/)
+      is_expected.to contain_file("/etc/systemd/system/gnatsd.service").with_content(/LimitNOFILE=5000/)
     end
   end
 

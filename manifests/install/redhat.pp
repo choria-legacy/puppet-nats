@@ -1,3 +1,4 @@
+# Manage redhat init scripts
 class nats::install::redhat {
 
   file { "gnatsd.redhat":

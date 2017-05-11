@@ -1,3 +1,4 @@
+# Manage upstart init scripts
 class nats::install::init {
 
   file { "gnatsd.init":

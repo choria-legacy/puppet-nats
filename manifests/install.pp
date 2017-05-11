@@ -1,3 +1,4 @@
+# Manage the NATS binary
 class nats::install {
   contain "nats::install::${nats::service_type}"
 

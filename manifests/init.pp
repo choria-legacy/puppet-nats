@@ -1,3 +1,4 @@
+# Install and manage the NATS messaging system
 class nats (
   Optional[String] $routes_password = undef,
   Array[String] $servers = [],

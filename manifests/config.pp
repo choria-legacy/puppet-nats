@@ -1,5 +1,6 @@
+# Manage the NATS config file
 class nats::config {
-  file{"${nats::configdir}/${nats::service_name}.cfg":
+  file { "${nats::configdir}/${nats::service_name}.cfg":
     owner   => "root",
     group   => "root",
     mode    => "0640",
