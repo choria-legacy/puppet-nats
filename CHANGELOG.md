@@ -1,5 +1,7 @@
 |Date      |Issue |Description                                                                                              |
 |----------|------|---------------------------------------------------------------------------------------------------------|
+|2017/05/19|      |Release 0.0.10                                                                                           |
+|2017/05/17|33    |Allow NATS to run as a user                                                                              |
 |2017/03/17|      |Release 0.0.9                                                                                            |
 |2017/04/13|28    |Allow setting number of open files for systemd based machines using `limit_nofile`                       |
 |2017/03/28|      |Release 0.0.8                                                                                            |
