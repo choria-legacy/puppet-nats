@@ -27,7 +27,7 @@ cluster {
 
   authorization {
     user: routes
-    password: <%= $nats::routes_password %>
+    password: "<%= $nats::routes_password %>"
     timeout: 0.75
   }
 
