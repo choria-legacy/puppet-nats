@@ -43,6 +43,8 @@ class nats (
       include nats::collectd
     }
   } else {
-    fail(sprintf("%s is not in the list of NATS servers %s", $facts["networking"]["fqdn"], $servers.join(", ")))
+    notify{'Nats sanity check':
+      message => sprintf("%s is not in the list of NATS servers %s", $facts["networking"]["fqdn"], $servers.join(", "))
+    }
   }
 }
