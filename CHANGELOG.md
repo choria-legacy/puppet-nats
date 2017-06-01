@@ -1,5 +1,9 @@
 |Date      |Issue |Description                                                                                              |
 |----------|------|---------------------------------------------------------------------------------------------------------|
+|2017/06/01|      |Release 0.0.11                                                                                           |
+|2017/06/01|40    |Use Hiera 5 to avoid deprecation notices and require Puppet >= 4.9.0                                     |
+|2017/05/29|38    |Notify instead of fail when Hiera data is missing                                                        |
+|2017/05/22|37    |Improve handling of passwords containing special characters                                              |
 |2017/05/19|      |Release 0.0.10                                                                                           |
 |2017/05/17|33    |Allow NATS to run as a user                                                                              |
 |2017/03/17|      |Release 0.0.9                                                                                            |
