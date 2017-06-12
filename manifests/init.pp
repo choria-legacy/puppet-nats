@@ -5,6 +5,7 @@ class nats (
   String $client_port = "4222",
   String $monitor_port = "8222",
   String $cluster_port = "4223",
+  String $listen_address = "::",
   Integer $max_payload_size = 1048576,
   Integer $max_pending_size = 10485760,
   Integer $max_connections = 65536,

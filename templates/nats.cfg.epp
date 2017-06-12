@@ -1,3 +1,4 @@
+net: <%= $nats::listen_address %>
 port: <%= $nats::client_port %>
 monitor_port: <%= $nats::monitor_port %>
 
