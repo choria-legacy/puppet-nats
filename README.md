@@ -16,7 +16,7 @@ It only supports verified TLS connections and defaults to using the Puppet certi
 It's recommended that you define a cluster of servers equal to 3 nodes, but it can run
 standalone too.
 
-By default clients will use port `4222`, monitoring will be on port `8222` and
+By default clients will listen on `::`, use port `4222`, monitoring will be on port `8222` and
 cluster comms will use port `4223`.
 
 This module installs the included `gnatsd` binary to `/usr/sbin/gnatsd` by
