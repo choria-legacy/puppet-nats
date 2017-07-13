@@ -15,7 +15,7 @@ class nats (
   String $binpath = "/usr/sbin/gnatsd",
   String $configdir = "/etc/gnatsd",
   String $piddir = "/var/run",
-  String $binary_source = "puppet:///modules/nats/gnatsd-0.9.6",
+  String $binary_source = "puppet:///modules/nats/gnatsd-1.0.0",
   String $service_name = "gnatsd",
   Enum["running", "stopped"] $service_ensure = "running",
   Nats::Service_type $service_type = "init",
@@ -31,7 +31,7 @@ class nats (
 ) {
   if $servers.empty or $facts["networking"]["fqdn"] in $servers {
     if SemVer.new($facts["aio_agent_version"]) < SemVer.new("1.5.2") {
-      fail("Puppet AIO Agent 1.5.2 or newer is needed by the ripienaar-nats module")
+      fail("Puppet AIO Agent 1.5.2 or newer is needed by the choria-nats module")
     }
 
     $peers = $servers.filter |$s| { $s != $facts["networking"]["fqdn"] }
