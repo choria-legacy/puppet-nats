@@ -27,7 +27,9 @@ class nats (
   Boolean $manage_user = false,
   Boolean $manage_group = false,
   String $user = "root",
-  String $group = "root"
+  String $group = "root",
+  Integer $tls_timeout = 2,
+  Integer $cluster_tls_timeout = 2,
 ) {
   if $servers.empty or $facts["networking"]["fqdn"] in $servers {
     if SemVer.new($facts["aio_agent_version"]) < SemVer.new("1.5.2") {

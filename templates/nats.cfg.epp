@@ -10,7 +10,7 @@ tls {
   key_file: "<%= $nats::key_file %>"
   ca_file: "<%= $nats::ca_file %>"
   verify: true
-  timeout: 2
+  timeout: <%= $nats::tls_timeout %>
 }
 
 <% unless $nats::peers.empty { -%>
@@ -23,7 +23,7 @@ cluster {
     key_file: "<%= $nats::key_file %>"
     ca_file: "<%= $nats::ca_file %>"
     verify: true
-    timeout: 2
+    timeout: <%= $nats::cluster_tls_timeout %>
   }
 
   authorization {
