@@ -1,6 +1,9 @@
 |Date      |Issue |Description                                                                                              |
 |----------|------|---------------------------------------------------------------------------------------------------------|
+|2017/07/25|      |Release 0.0.12                                                                                           |
+|2017/06/12|      |Make the TLS timeouts configurable using `tls_timeout` and `cluster_tls_timeout`                         |
 |2017/07/14|46    |Update NATS to 1.0.0                                                                                     |
+|2017/06/12|45    |Add `listen_address` option                                                                              |
 |2017/06/01|      |Release 0.0.11                                                                                           |
 |2017/06/01|40    |Use Hiera 5 to avoid deprecation notices and require Puppet >= 4.9.0                                     |
 |2017/05/29|38    |Notify instead of fail when Hiera data is missing                                                        |
