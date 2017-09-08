@@ -30,11 +30,18 @@ class nats (
   String $group = "root",
   Integer $tls_timeout = 2,
   Integer $cluster_tls_timeout = 2,
+  Boolean $manage_package = false,
+  String $package_name = "gnatsd",
+  Enum["present", "latest"] $package_ensure = "present",
 ) {
   if $servers.empty or $facts["networking"]["fqdn"] in $servers {
     $peers = $servers.filter |$s| { $s != $facts["networking"]["fqdn"] }
 
-    include nats::install
+    if $manage_package {
+      include nats::package
+    } else {
+      include nats::install
+    }
     include nats::config
     include nats::service
 
