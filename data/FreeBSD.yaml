@@ -1,2 +1,4 @@
 ---
+nats::configdir: ~
+nats::configfile: /usr/local/etc/gnatsd.conf
 nats::service_type: freebsd

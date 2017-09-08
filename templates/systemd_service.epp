@@ -10,7 +10,7 @@ Group=<%= $nats::group %>
 <% if $nats::limit_nofile { -%>
 LimitNOFILE=<%= $nats::limit_nofile %>
 <% } -%>
-ExecStart=<%= $nats::binpath %> --config <%= $nats::configdir %>/<%= $nats::service_name %>.cfg -s
+ExecStart=<%= $nats::binpath %> --config <%= $nats::configfile %> -s
 
 [Install]
 WantedBy=multi-user.target

@@ -14,6 +14,7 @@ class nats (
   Boolean $announce_cluster = false,
   String $binpath = "/usr/sbin/gnatsd",
   String $configdir = "/etc/gnatsd",
+  String $configfile = "/etc/gnatsd/gnatsd.cfg",
   String $piddir = "/var/run",
   String $binary_source = "puppet:///modules/nats/gnatsd-1.0.0",
   String $service_name = "gnatsd",
