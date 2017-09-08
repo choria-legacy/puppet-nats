@@ -225,4 +225,42 @@ describe "nats" do
       end
     end
   end
+
+  context "when using system packages" do
+    let(:params) do
+      {
+        :manage_package => true
+      }
+    end
+
+    it "should install the gnatsd package" do
+      is_expected.to contain_package("gnatsd").with_ensure("present")
+    end
+  end
+
+  context "on FreeBSD" do
+    let(:facts) do
+      {
+        "osfamily" => "FreeBSD",
+      }
+    end
+    let(:params) do
+      {
+        :configfile => "/usr/local/etc/gnatsd.conf",
+        :manage_package => true
+      }
+    end
+
+    it "should setup configuration and service" do
+      is_expected.to_not contain_file("/usr/sbin/gnatsd")
+      is_expected.to_not contain_file("/etc/gnatsd")
+      is_expected.to_not contain_file("/etc/gnatsd/gnatsd.cfg")
+      is_expected.to contain_file("/usr/local/etc/gnatsd.conf")
+      is_expected.to_not contain_systemd__unit_file("gnatsd.service")
+      is_expected.to contain_service("gnatsd").with_ensure("running")
+      is_expected.to_not contain_file("gnatsd.upstart")
+      is_expected.to_not contain_file("gnatsd upstart initd symlink")
+      is_expected.to_not contain_file("gnatsd.init")
+    end
+  end
 end
