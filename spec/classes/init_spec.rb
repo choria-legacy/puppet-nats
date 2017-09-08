@@ -225,21 +225,4 @@ describe "nats" do
       end
     end
   end
-
-  context "when using an old puppet" do
-    let(:facts) do
-      {
-        "aio_agent_version" => "1.4.0",
-        "networking" => {
-          "fqdn" => "rspec.example.com"
-        }
-      }
-    end
-
-    it "should only support recent AIO agent versions" do
-      expect {
-        is_expected.to(compile)
-      }.to raise_error(/Puppet AIO Agent 1.5.2 or newer is needed by the choria-nats module/)
-    end
-  end
 end

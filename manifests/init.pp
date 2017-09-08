@@ -32,10 +32,6 @@ class nats (
   Integer $cluster_tls_timeout = 2,
 ) {
   if $servers.empty or $facts["networking"]["fqdn"] in $servers {
-    if SemVer.new($facts["aio_agent_version"]) < SemVer.new("1.5.2") {
-      fail("Puppet AIO Agent 1.5.2 or newer is needed by the choria-nats module")
-    }
-
     $peers = $servers.filter |$s| { $s != $facts["networking"]["fqdn"] }
 
     include nats::install
