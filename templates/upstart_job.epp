@@ -18,4 +18,4 @@ respawn limit 10 5
 
 console log
 
-exec <%= $nats::binpath %> --config <%= $nats::configdir %>/<%= $nats::service_name %>.cfg
+exec <%= $nats::binpath %> --config <%= $nats::configfile %>

@@ -22,7 +22,7 @@ export PATH
 name="<%= $nats::service_name %>"
 program="<%= $nats::binpath %>"
 pidfile="<%= $nats::piddir %>/<%= $nats::service_name %>.pid"
-args="--config <%= $nats::configdir %>/<%= $nats::service_name %>.cfg --pid $pidfile"
+args="--config <%= $nats::configfile %> --pid $pidfile"
 user="<%= $nats::user %>"
 group="<%= $nats::group %>"
 chroot="/"

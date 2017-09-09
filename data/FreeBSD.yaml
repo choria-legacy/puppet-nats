@@ -1,0 +1,6 @@
+---
+nats::binpath: /usr/local/bin/gnatsd
+nats::configdir: ~
+nats::configfile: /usr/local/etc/gnatsd.conf
+nats::group: wheel
+nats::service_type: freebsd

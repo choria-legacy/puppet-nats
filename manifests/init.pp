@@ -14,6 +14,7 @@ class nats (
   Boolean $announce_cluster = false,
   String $binpath = "/usr/sbin/gnatsd",
   String $configdir = "/etc/gnatsd",
+  String $configfile = "/etc/gnatsd/gnatsd.cfg",
   String $piddir = "/var/run",
   String $binary_source = "puppet:///modules/nats/gnatsd-1.0.0",
   String $service_name = "gnatsd",
@@ -30,15 +31,18 @@ class nats (
   String $group = "root",
   Integer $tls_timeout = 2,
   Integer $cluster_tls_timeout = 2,
+  Boolean $manage_package = false,
+  String $package_name = "gnatsd",
+  Enum["present", "latest"] $package_ensure = "present",
 ) {
   if $servers.empty or $facts["networking"]["fqdn"] in $servers {
-    if SemVer.new($facts["aio_agent_version"]) < SemVer.new("1.5.2") {
-      fail("Puppet AIO Agent 1.5.2 or newer is needed by the choria-nats module")
-    }
-
     $peers = $servers.filter |$s| { $s != $facts["networking"]["fqdn"] }
 
-    include nats::install
+    if $manage_package {
+      include nats::package
+    } else {
+      include nats::install
+    }
     include nats::config
     include nats::service
 
