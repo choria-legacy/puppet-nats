@@ -1,6 +1,6 @@
 {
   "name": "choria-nats",
-  "version": "0.0.12",
+  "version": "0.1.0",
   "author": "choria",
   "summary": "NATS.io module for the Choria Orchestrator",
   "license": "Apache-2.0",

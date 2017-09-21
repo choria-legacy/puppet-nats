@@ -1,5 +1,7 @@
 |Date      |Issue |Description                                                                                              |
 |----------|------|---------------------------------------------------------------------------------------------------------|
+|2017/09/21|      |Release 0.1.0                                                                                            |
+|2017/09/08|50    |Support FreeBSD                                                                                          |
 |2017/07/25|      |Release 0.0.12                                                                                           |
 |2017/06/12|      |Make the TLS timeouts configurable using `tls_timeout` and `cluster_tls_timeout`                         |
 |2017/07/14|46    |Update NATS to 1.0.0                                                                                     |
