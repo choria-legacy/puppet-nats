@@ -43,3 +43,4 @@ cluster {
 max_payload: <%= $nats::max_payload_size %>
 max_pending_size: <%= $nats::max_pending_size %>
 max_connections: <%= $nats::max_connections %>
+write_deadline: <%= $nats::write_deadline %>
