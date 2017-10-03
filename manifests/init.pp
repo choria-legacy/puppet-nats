@@ -16,7 +16,7 @@ class nats (
   String $configdir = "/etc/gnatsd",
   String $configfile = "/etc/gnatsd/gnatsd.cfg",
   String $piddir = "/var/run",
-  String $binary_source = "puppet:///modules/nats/gnatsd-1.0.0",
+  String $binary_source = "puppet:///modules/nats/gnatsd-1.0.4",
   String $service_name = "gnatsd",
   Enum["running", "stopped"] $service_ensure = "running",
   Nats::Service_type $service_type = "init",
