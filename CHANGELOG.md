@@ -1,5 +1,7 @@
 |Date      |Issue |Description                                                                                              |
 |----------|------|---------------------------------------------------------------------------------------------------------|
+|2017/10/19|      |Release 0.2.0                                                                                            |
+|2017/10/12|59    |Allow latest systemd module to be used                                                                   |
 |2017/10/03|52    |Allow `write_deadline` to be configured                                                                  |
 |2017/10/03|54    |Update to NATS 1.0.4                                                                                     |
 |2017/09/21|      |Release 0.1.0                                                                                            |
