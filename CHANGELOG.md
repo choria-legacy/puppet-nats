@@ -1,5 +1,6 @@
 |Date      |Issue |Description                                                                                              |
 |----------|------|---------------------------------------------------------------------------------------------------------|
+|2017|11/07|61    |Support disabling TLS                                                                                    |
 |2017/10/19|      |Release 0.2.0                                                                                            |
 |2017/10/12|59    |Allow latest systemd module to be used                                                                   |
 |2017/10/03|52    |Allow `write_deadline` to be configured                                                                  |

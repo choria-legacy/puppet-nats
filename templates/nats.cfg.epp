@@ -5,6 +5,7 @@ monitor_port: <%= $nats::monitor_port %>
 debug: <%= $nats::debug %>
 trace: <%= $nats::trace %>
 
+<% if $nats::enable_tls { -%>
 tls {
   cert_file: "<%= $nats::cert_file %>"
   key_file: "<%= $nats::key_file %>"
@@ -12,12 +13,14 @@ tls {
   verify: true
   timeout: <%= $nats::tls_timeout %>
 }
+<% } %>
 
 <% unless $nats::peers.empty { -%>
 cluster {
   port: 4223
   no_advertise: <%= !$nats::announce_cluster %>
 
+<% if $nats::enable_tls { -%>
   tls {
     cert_file: "<%= $nats::cert_file %>"
     key_file: "<%= $nats::key_file %>"
@@ -25,6 +28,7 @@ cluster {
     verify: true
     timeout: <%= $nats::cluster_tls_timeout %>
   }
+<% } %>
 
   authorization {
     user: routes

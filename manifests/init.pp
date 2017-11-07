@@ -24,6 +24,7 @@ class nats (
   String $cert_file = "/etc/puppetlabs/puppet/ssl/certs/${trusted['certname']}.pem",
   String $key_file = "/etc/puppetlabs/puppet/ssl/private_keys/${trusted['certname']}.pem",
   String $ca_file = "/etc/puppetlabs/puppet/ssl/certs/ca.pem",
+  Boolean $enable_tls = true,
   Boolean $manage_collectd = false,
   Optional[Integer] $limit_nofile = undef,
   Boolean $manage_user = false,

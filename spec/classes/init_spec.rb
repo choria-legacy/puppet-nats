@@ -164,6 +164,20 @@ describe "nats" do
 
   context "when requesting collectd" do
     let(:params) {{ :manage_collectd => true }}
+    let(:facts) do
+      {
+        "aio_agent_version" => "1.7.0",
+        "osfamily" => "RedHat",
+        "os" => {
+          "family" => "RedHat"
+        },
+        "networking" => {
+          "fqdn" => "rspec.example.com"
+        },
+        "PATH" => "/usr/bin",
+        "operatingsystemmajrelease" => "6"
+      }
+    end
 
     it "should contain the curl_json plugin instance" do
       is_expected.to contain_collectd__plugin__curl_json("gnatsd").with_url("http://localhost:8222/varz")
