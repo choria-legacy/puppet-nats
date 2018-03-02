@@ -3,6 +3,12 @@
 This is a basic module to configure NATS.io for use with Puppet 4, it's intended as
 a companion module to the `ripienaar/mcollective` module.
 
+**DEPRECATED:** This module is now deprecated, you should use the Broker features
+provided by the `choria/choria` module.
+
+To remove the files this module added while moving to `choria/choria` set `ensure => absent`
+on this module.
+
 ## Overview
 
 This module will install the NATS binary on your machine via source from inside the
