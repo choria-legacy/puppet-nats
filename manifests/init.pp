@@ -36,24 +36,31 @@ class nats (
   Boolean $manage_package = false,
   String $package_name = "gnatsd",
   Enum["present", "latest"] $package_ensure = "present",
+  Enum["present", "absent"] $ensure = "present",
 ) {
-  if $servers.empty or $facts["networking"]["fqdn"] in $servers {
-    $peers = $servers.filter |$s| { $s != $facts["networking"]["fqdn"] }
+  if $ensure == "present" {
+    if $servers.empty or $facts["networking"]["fqdn"] in $servers {
+      notify{"The choria/nats module is now deprecated, please use choria/choria": }
 
-    if $manage_package {
-      include nats::package
+      $peers = $servers.filter |$s| { $s != $facts["networking"]["fqdn"] }
+
+      if $manage_package {
+        include nats::package
+      } else {
+        include nats::install
+      }
+      include nats::config
+      include nats::service
+
+      if $manage_collectd {
+        include nats::collectd
+      }
     } else {
-      include nats::install
-    }
-    include nats::config
-    include nats::service
-
-    if $manage_collectd {
-      include nats::collectd
+      notify{'Nats sanity check':
+        message => sprintf("%s is not in the list of NATS servers %s", $facts["networking"]["fqdn"], $servers.join(", "))
+      }
     }
   } else {
-    notify{'Nats sanity check':
-      message => sprintf("%s is not in the list of NATS servers %s", $facts["networking"]["fqdn"], $servers.join(", "))
-    }
+    include nats::remove
   }
 }
