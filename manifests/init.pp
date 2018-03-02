@@ -61,6 +61,6 @@ class nats (
       }
     }
   } else {
-    include nats::remove
+    contain nats::remove
   }
 }
