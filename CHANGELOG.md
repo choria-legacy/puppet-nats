@@ -1,5 +1,7 @@
 |Date      |Issue |Description                                                                                              |
 |----------|------|---------------------------------------------------------------------------------------------------------|
+|2018/03/21|      |Release 0.4.0                                                                                            |
+|2018/03/02|71    |Deprecate this module in favour of `choria/choria` module and the new Choria Broker                      |
 |2018/02/25|      |Release 0.3.0                                                                                            |
 |2018/01/29|68    |Support Debian Stretch                                                                                   |
 |2017/11/17|63    |Ensure systemd is being used on OEL7                                                                     |
